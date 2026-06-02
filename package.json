@@ -1,0 +1,16 @@
+{
+  "name": "rmg-playable-catalog",
+  "version": "1.0.0",
+  "description": "CRAFTSMAN+ × RMG — Curated Playable Ad Catalog",
+  "private": true,
+  "scripts": {
+    "screenshots": "node scripts/screenshot.js",
+    "screenshots:force": "node scripts/screenshot.js --force"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
