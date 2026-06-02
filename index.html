@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090B" />
+  <title>CRAFTSMAN+ — RMG Playable Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────────────────
+       CRAFTSMAN+ brand system — sourced from craftsmanplus.com
+       theme-color: #09090B (near-black zinc base)
+       primary:     #F86400 (orange CTA)
+       ─────────────────────────────────────────────────────────
+       Surface scale (zinc-900 family):
+         bg-base:    #09090B  — page background
+         bg-raised:  #111113  — nav, footer
+         surface:    #18181B  — card default (zinc-900)
+         surface-2:  #1F1F23  — card hover / elevated
+         surface-3:  #27272A  — input bg, secondary surfaces
+         border:     #27272A  — default border (zinc-800)
+         border-2:   #3F3F46  — stronger border (zinc-700)
+
+       Text scale:
+         text:       #FAFAFA  — primary (zinc-50)
+         text-2:     #A1A1AA  — secondary (zinc-400)
+         text-3:     #52525B  — muted (zinc-600)
+
+       Accent:
+         orange:     #F86400  — primary CTA / active
+         orange-dim: #2C1500  — tinted bg for orange pills
+         orange-glow: rgba(248,100,0,0.18)
+
+       Category colours (dark-mode friendly):
+         casino:     #F59E0B  amber — gold feels right for casino
+         casino-dim: #1C0F00
+         lottery:    #60A5FA  blue-400
+         lottery-dim:#0C1A33
+    ───────────────────────────────────────────────────────── */
+    :root {
+      --bg:          #09090B;
+      --bg-raised:   #111113;
+      --surface:     #18181B;
+      --surface-2:   #1F1F23;
+      --surface-3:   #27272A;
+      --border:      #27272A;
+      --border-2:    #3F3F46;
+      --text:        #FAFAFA;
+      --text-2:      #A1A1AA;
+      --text-3:      #52525B;
+      --orange:      #F86400;
+      --orange-soft: #FF8C38;
+      --orange-dim:  #2C1500;
+      --orange-glow: rgba(248,100,0,0.15);
+      --amber:       #F59E0B;
+      --amber-dim:   #1C1000;
+      --blue:        #60A5FA;
+      --blue-dim:    #0C1A2E;
+      --emerald:     #34D399;
+      --emerald-dim: #051A10;
+      --radius:      6px;
+      --radius-lg:   10px;
+      --shadow:      0 1px 4px rgba(0,0,0,0.5);
+      --shadow-lg:   0 12px 48px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.4);
+      --trans:       0.16s cubic-bezier(0.4,0,0.2,1);
+      --font:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif:       'Playfair Display', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      justify-content: space-between;
+      background: rgba(9,9,11,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-wordmark {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .nav-sep { width: 1px; height: 16px; background: var(--border-2); }
+
+    .nav-sub {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+
+    .nav-count {
+      font-size: 12px;
+      color: var(--text-3);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      padding: 64px 28px 52px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Orange glow behind title — mirrors craftsmanplus.com hero treatment */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -60px;
+      width: 560px;
+      height: 360px;
+      background: radial-gradient(ellipse at 30% 40%, var(--orange-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--orange);
+      opacity: 0.7;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 700;
+      line-height: 1.06;
+      color: var(--text);
+      max-width: 580px;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .hero-body {
+      font-size: 15px;
+      color: var(--text-2);
+      max-width: 460px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── FILTER BAR ──────────────────────────────────────────── */
+    .filter-bar {
+      position: sticky;
+      top: 56px;
+      z-index: 40;
+      background: rgba(9,9,11,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-2);
+      color: var(--text-2);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 4px 13px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all var(--trans);
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-3);
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    /* Active states keyed to brand + category */
+    .filter-btn[data-cat="All"].active    { border-color: var(--orange);  color: var(--orange);  background: var(--orange-dim); }
+    .filter-btn[data-cat="Casino"].active { border-color: var(--amber);   color: var(--amber);   background: var(--amber-dim); }
+    .filter-btn[data-cat="Lottery"].active{ border-color: var(--blue);    color: var(--blue);    background: var(--blue-dim); }
+    .filter-btn[data-cat="Casual"].active { border-color: var(--emerald); color: var(--emerald); background: var(--emerald-dim); }
+
+    .filter-spacer { flex: 1; }
+
+    .search-wrap { position: relative; display: flex; align-items: center; }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      color: var(--text-3);
+      pointer-events: none;
+      display: flex;
+    }
+
+    .search-input {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      padding: 5px 12px 5px 30px;
+      outline: none;
+      width: 166px;
+      transition: all var(--trans);
+    }
+
+    .search-input::placeholder { color: var(--text-3); }
+
+    .search-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px var(--orange-glow);
+      width: 200px;
+    }
+
+    /* ── GRID ────────────────────────────────────────────────── */
+    .grid-wrap { padding: 28px; }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── CARD ────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans), background var(--trans);
+      animation: fadeUp 0.32s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:nth-child(1)  { animation-delay:.03s }
+    .card:nth-child(2)  { animation-delay:.06s }
+    .card:nth-child(3)  { animation-delay:.09s }
+    .card:nth-child(4)  { animation-delay:.12s }
+    .card:nth-child(5)  { animation-delay:.15s }
+    .card:nth-child(6)  { animation-delay:.18s }
+    .card:nth-child(7)  { animation-delay:.21s }
+    .card:nth-child(8)  { animation-delay:.24s }
+    .card:nth-child(9)  { animation-delay:.27s }
+    .card:nth-child(10) { animation-delay:.30s }
+    .card:nth-child(n+11) { animation-delay:.33s }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px var(--orange-glow);
+      border-color: rgba(248,100,0,0.3);
+      background: var(--surface-2);
+    }
+
+    .card.hidden { display: none; }
+
+    /* Thumb */
+    .card-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9/16;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+
+    .card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-thumb img { transform: scale(1.04); }
+
+    .thumb-ph {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(160deg, var(--surface-2) 0%, var(--surface-3) 100%);
+    }
+
+    .thumb-ph svg { width: 32px; height: 32px; opacity: 0.12; color: var(--text); }
+    .thumb-ph span { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+
+    /* Category pill */
+    .card-cat {
+      position: absolute;
+      top: 8px; left: 8px;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+    }
+
+    .card-cat.Casino  { color: var(--amber);   border-color: rgba(245,158,11,0.35); background: var(--amber-dim); }
+    .card-cat.Lottery { color: var(--blue);    border-color: rgba(96,165,250,0.35); background: var(--blue-dim); }
+    .card-cat.Casual  { color: var(--emerald); border-color: rgba(52,211,153,0.35); background: var(--emerald-dim); }
+
+    /* Play overlay */
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background var(--trans);
+    }
+
+    .card:hover .play-overlay { background: rgba(0,0,0,0.45); }
+
+    .play-circle {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity var(--trans), transform var(--trans);
+      box-shadow: 0 2px 20px rgba(248,100,0,0.5);
+    }
+
+    .card:hover .play-circle { opacity: 1; transform: scale(1); }
+    .play-circle svg { width: 16px; height: 16px; fill: #fff; margin-left: 2px; }
+
+    /* Footer */
+    .card-footer {
+      padding: 11px 13px 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 5px;
+    }
+
+    .card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+    .tag {
+      font-size: 10px;
+      color: var(--text-3);
+      background: var(--surface-3);
+      border: 1px solid var(--border-2);
+      padding: 2px 7px;
+      border-radius: 100px;
+    }
+
+    /* ── EMPTY STATE ─────────────────────────────────────────── */
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 80px 20px; display: none; }
+    .empty-state.show { display: block; }
+    .empty-state p { font-size: 14px; color: var(--text-3); margin-top: 8px; }
+
+    /* ── MODAL ───────────────────────────────────────────────── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 840px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(18px) scale(0.97);
+      transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+
+    .overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background: var(--surface-2);
+    }
+
+    .modal-head-left { display: flex; align-items: center; gap: 10px; }
+
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .modal-close {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      background: var(--surface-3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-2);
+      font-size: 17px;
+      font-family: sans-serif;
+      line-height: 1;
+      transition: all var(--trans);
+    }
+
+    .modal-close:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .modal-side {
+      border-right: 1px solid var(--border);
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--bg-raised);
+    }
+
+    .meta-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .meta-value { font-size: 13px; color: var(--text-2); }
+
+    .url-box {
+      font-size: 10px;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      color: var(--text-3);
+      background: var(--surface-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      padding: 9px;
+      word-break: break-all;
+      line-height: 1.55;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 9px 14px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--trans), box-shadow var(--trans);
+      margin-top: auto;
+    }
+
+    .open-btn:hover {
+      background: var(--orange-soft);
+      box-shadow: 0 0 24px rgba(248,100,0,0.4);
+    }
+
+    .open-btn svg { width: 13px; height: 13px; }
+
+    .modal-preview {
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Phone shell */
+    .phone {
+      width: 252px;
+      height: 528px;
+      background: #0D0D0F;
+      border-radius: 40px;
+      border: 2px solid #2C2C30;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.6),
+        0 24px 72px rgba(0,0,0,0.7),
+        inset 0 0 0 1px rgba(255,255,255,0.03);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 20px;
+      background: #0D0D0F;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    .phone iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-raised);
+    }
+
+    .footer-left  { font-size: 12px; color: var(--text-3); }
+    .footer-right { font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; }
+    .footer-accent { color: var(--orange); opacity: 0.8; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      nav, .hero, .filter-bar, .grid-wrap, footer { padding-left: 14px; padding-right: 14px; }
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .modal-body   { grid-template-columns: 1fr; }
+      .modal-side   { border-right: none; border-bottom: 1px solid var(--border); max-height: 220px; }
+      .search-input { width: 120px; }
+      .search-input:focus { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">
+      <span class="nav-wordmark">CRAFTSMAN+</span>
+      <div class="nav-sep"></div>
+      <span class="nav-sub">RMG Catalog</span>
+    </a>
+    <span class="nav-count" id="navCount"></span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Real Money Gaming · Interactive Playables</p>
+    <h1 class="hero-title">Built for <em>RMG.</em><br>Ready to deploy.</h1>
+    <p class="hero-body">A curated set of playable ad experiences across casino, lottery, and casual gaming — built on CRAFTSMAN PLAY and tailored for the RMG vertical.</p>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-cat="All">All</button>
+    <button class="filter-btn" data-cat="Casino">Casino</button>
+    <button class="filter-btn" data-cat="Lottery">Lottery</button>
+    <button class="filter-btn" data-cat="Casual">Casual</button>
+    <div class="filter-spacer"></div>
+    <div class="search-wrap">
+      <span class="search-icon">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <circle cx="5.5" cy="5.5" r="4" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M9 9L12 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search…" />
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="catalog-grid" id="grid">
+      <div class="empty-state" id="emptyState">
+        <p>No playables match your filter.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div class="modal-head-left">
+          <span class="modal-title" id="mTitle"></span>
+          <span class="card-cat" id="mCat"></span>
+        </div>
+        <button class="modal-close" id="mClose" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-side">
+          <div>
+            <p class="meta-label">Category</p>
+            <p class="meta-value" id="mCatText"></p>
+          </div>
+          <div>
+            <p class="meta-label">Tags</p>
+            <div class="card-tags" id="mTags"></div>
+          </div>
+          <a class="open-btn" id="mExternal" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 13 13" fill="none">
+              <path d="M2 11L11 2M11 2H6.5M11 2V6.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Open External
+          </a>
+        </div>
+        <div class="modal-preview">
+          <div class="phone">
+            <iframe id="mIframe" title="Playable Preview" allow="autoplay; fullscreen" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-left">© 2026 CRAFTSMAN+. All rights reserved.</span>
+    <span class="footer-right"><span class="footer-accent">RMG</span> · Playable Catalog</span>
+  </footer>
+
+  <script>
+const PLAYABLES = [
+    // ── RMG Static Playables (core set) ──────────────────────
+    {
+      id: 1,
+      name: "Bison",
+      category: "Casino",
+      tags: ["slots", "adventure"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/bison/7/320x480/index.html?portrait=true",
+      thumbnail: "images/bison.jpg"
+    },
+    {
+      id: 2,
+      name: "Aztec Gold",
+      category: "Casino",
+      tags: ["slots", "adventure"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/aztec/11/320x480/index.html?portrait=true",
+      thumbnail: "images/aztec-gold.jpg"
+    },
+    {
+      id: 3,
+      name: "90B Spot",
+      category: "Casino",
+      tags: ["bingo", "social"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/90bspot/16/audio_on/index.html?portrait=true",
+      thumbnail: "images/90b-spot.jpg"
+    },
+    {
+      id: 4,
+      name: "PPK Monopoly",
+      category: "Lottery",
+      tags: ["board", "scratch"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/76ppkmonopoly/12/index.html?portrait=true",
+      thumbnail: "images/ppk-monopoly.jpg"
+    },
+    {
+      id: 5,
+      name: "Half Dome",
+      category: "Lottery",
+      tags: ["scratch", "adventure"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/123halfdome/24/index.html?portrait=true",
+      thumbnail: "images/half-dome.jpg"
+    },
+    {
+      id: 6,
+      name: "Illinois Lottery",
+      category: "Lottery",
+      tags: ["scratch", "state"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/100illinoislottery/7/index.html?portrait=true",
+      thumbnail: "images/illinois-lottery.jpg"
+    },
+    {
+      id: 7,
+      name: "Maryland Lottery",
+      category: "Lottery",
+      tags: ["scratch", "state"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/106marylandlottery/15/index.html?portrait=true",
+      thumbnail: "images/maryland-lottery.jpg"
+    },
+    {
+      id: 8,
+      name: "OLG Plinko",
+      category: "Lottery",
+      tags: ["plinko", "physics"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/99olg/plinko/5/index.html?portrait=true",
+      thumbnail: "images/olg-plinko.jpg"
+    },
+    {
+      id: 9,
+      name: "Papaya",
+      category: "Casual",
+      tags: ["match", "puzzle"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/103papaya/15/index.html?portrait=true",
+      thumbnail: "images/papaya.jpg"
+    },
+    {
+      id: 10,
+      name: "Match to Win",
+      category: "Casual",
+      tags: ["match", "puzzle"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/63matchtowin/13/index.html?portrait=true",
+      thumbnail: "images/match-to-win.jpg"
+    },
+    {
+      id: 11,
+      name: "Skillz — Solitaire Cube",
+      category: "Casual",
+      tags: ["cards", "skill"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/82skillz/solitairecube/24/index.html?portrait=true",
+      thumbnail: "images/skillz-solitaire.jpg"
+    },
+    {
+      id: 12,
+      name: "Skillz — Blackout Blitz",
+      category: "Casual",
+      tags: ["bingo", "skill"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/82skillz/blackoutblitz/14/index.html?portrait=true",
+      thumbnail: "images/skillz-blackout.jpg"
+    },
+    {
+      id: 13,
+      name: "Hot Vegas",
+      category: "Casino",
+      tags: ["slots", "vegas"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/hotvegas/9/zr/index.html?portrait=true",
+      thumbnail: "images/hot-vegas.jpg"
+    },
+    {
+      id: 14,
+      name: "Super Lucky Bingo",
+      category: "Casino",
+      tags: ["bingo", "social"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/67superluckybingo/13/index.html?portrait=true",
+      thumbnail: "images/super-lucky-bingo.jpg"
+    },
+    // ── Additional full list (companyId-based) ────────────────
+    {
+      id: 15,
+      name: "KS Samurai Sakura",
+      category: "Casino",
+      tags: ["slots", "themed"],
+      previewUrl: "https://play.preview.craftsmanplus.com/?playable=iOvXbf0jaF8%2F14OS9yyXvj9%2F851495604&companyId=iOvXbf0jaF8&creativeId=14OS9yyXvj9&name=KS%20Samurai%20Sakura&portrait=true&ratio=2:1",
+      thumbnail: "images/ks-samurai-sakura.jpg"
+    },
+    {
+      id: 16,
+      name: "88 Drums",
+      category: "Casino",
+      tags: ["slots", "themed"],
+      previewUrl: "https://play.preview.craftsmanplus.com/?playable=QUlaizHmsQl%2F6TnD2MeQo6d%2F634028704&companyId=QUlaizHmsQl&creativeId=6TnD2MeQo6d&name=2815%2088%20Drums&portrait=true&ratio=2:1",
+      thumbnail: "images/88-drums.jpg"
+    },
+    {
+      id: 17,
+      name: "Billionaire's Bank",
+      category: "Casino",
+      tags: ["slots", "themed"],
+      previewUrl: "https://play.preview.craftsmanplus.com/?playable=QUlaizHmsQl%2FDamU247vmfP%2F850174439&companyId=QUlaizHmsQl&creativeId=DamU247vmfP&name=2815%20Billionaire%27s%20bank%20v2&portrait=true&ratio=2:1",
+      thumbnail: "images/billionaires-bank.jpg"
+    },
+    {
+      id: 18,
+      name: "C43 Pick 6",
+      category: "Lottery",
+      tags: ["pick", "numbers"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?playable=RLiHs3wlCO5%2FrAzTNZQe0de&companyId=iOvXbf0jaF8&creativeId=RLiHs3wlCO5&name=C43%5C_Pick6%5C_V3-2&portrait=true&ratio=2:1",
+      thumbnail: "images/c43-pick6.jpg"
+    },
+    {
+      id: 19,
+      name: "Lucky Strip",
+      category: "Casino",
+      tags: ["scratch", "strip"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?playable=QWeCeXw4jVC%2FcDzAJDM63Vn&companyId=B630HMOcIup&creativeId=QWeCeXw4jVC&name=Lucky%20Strip%20V04&portrait=true&ratio=2:1",
+      thumbnail: "images/lucky-strip.jpg"
+    },
+    {
+      id: 20,
+      name: "Atlantis Thunder",
+      category: "Casino",
+      tags: ["slots", "adventure"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?playable=8aoKd9j73nS/3UizbBwFqCR&companyId=B630HMOcIup&creativeId=8aoKd9j73nS&name=Atlantis%20Thunder%20V02&portrait=true&ratio=2:1",
+      thumbnail: "images/atlantis-thunder.jpg"
+    },
+    {
+      id: 21,
+      name: "RMG Desktop I",
+      category: "Casino",
+      tags: ["desktop", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/YBzOEKnJDRz/GcMYH6jGhSG/Default_Desktop__partner_template.html&companyId=B630HMOcIup",
+      thumbnail: "images/rmg-desktop-1.jpg"
+    },
+    {
+      id: 22,
+      name: "RMG Desktop II",
+      category: "Casino",
+      tags: ["desktop", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/B4ywPtmctbf/iY3mkFNXPOT/Default_Desktop__partner_template.html&companyId=B630HMOcIup",
+      thumbnail: "images/rmg-desktop-2.jpg"
+    },
+    {
+      id: 23,
+      name: "RMG Desktop III",
+      category: "Casino",
+      tags: ["desktop", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/fiQExbFs7Te/qGdVgb8nRDA/Default_Desktop__partner_template.html&companyId=B630HMOcIup",
+      thumbnail: "images/rmg-desktop-3.jpg"
+    },
+    {
+      id: 24,
+      name: "Partner Creative I",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://www.craftsman-plus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/0b8dLllYL3J/u7v7bmFBbKb/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-1.jpg"
+    },
+    {
+      id: 25,
+      name: "Partner Creative II",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://www.craftsman-plus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/Abwaydh2u3Z/evEo8Htl2dx/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-2.jpg"
+    },
+    {
+      id: 26,
+      name: "Partner Creative III",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://www.craftsman-plus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/qcQLmfHxmfl/sulya3xOKaM/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-3.jpg"
+    },
+    {
+      id: 27,
+      name: "Partner Creative IV",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://www.craftsman-plus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/Gavr8EtYNqw/3lv72fu0nFO/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-4.jpg"
+    },
+    {
+      id: 28,
+      name: "Partner Creative V",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/qdg3plzAX58/wiUAmmVtSyX/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-5.jpg"
+    },
+    {
+      id: 29,
+      name: "Partner Creative VI",
+      category: "Casino",
+      tags: ["desktop", "partner"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/y0x6ktfX1cx/dJPRGlIdQay/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-creative-6.jpg"
+    },
+    {
+      id: 30,
+      name: "MRAID Template I",
+      category: "Casino",
+      tags: ["mraid", "mobile"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/rCb8rkt4Vkc/Uuouom7JLSb/Default_partner_template.html&companyId=dnmFUzgGqY1",
+      thumbnail: "images/mraid-1.jpg"
+    },
+    {
+      id: 31,
+      name: "MRAID Template II",
+      category: "Casino",
+      tags: ["mraid", "mobile"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/qLhOhk3Zi7D/Of14BwWZeB3/Default_partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-2.jpg"
+    },
+    {
+      id: 32,
+      name: "Playable Template A",
+      category: "Casino",
+      tags: ["template", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://playable-templates.craftsmanplus.com/1687884262892_1687884262892.html",
+      thumbnail: "images/template-a.jpg"
+    },
+    {
+      id: 33,
+      name: "Partner Standard I",
+      category: "Casino",
+      tags: ["standard", "partner"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/AWo9Wet1NfF/C9Db3Sos1A9/Default_partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-standard-1.jpg"
+    },
+    {
+      id: 34,
+      name: "Partner Standard II",
+      category: "Casino",
+      tags: ["standard", "partner"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/NNhBEzFpJaK/YmxSQl2dD5G/Default_partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/partner-standard-2.jpg"
+    },
+    {
+      id: 35,
+      name: "Playable Template B",
+      category: "Casino",
+      tags: ["template", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://playable-templates.craftsmanplus.com/1678808308232_1678808308232.html",
+      thumbnail: "images/template-b.jpg"
+    },
+    {
+      id: 36,
+      name: "Playable Template C",
+      category: "Casino",
+      tags: ["template", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://playable-templates.craftsmanplus.com/1678824718341_1678824718341.html",
+      thumbnail: "images/template-c.jpg"
+    },
+    {
+      id: 37,
+      name: "Playable Template D",
+      category: "Casino",
+      tags: ["template", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://playable-templates.craftsmanplus.com/1678899319642_1678899319642.html",
+      thumbnail: "images/template-d.jpg"
+    },
+    {
+      id: 38,
+      name: "Playable Template E",
+      category: "Casino",
+      tags: ["template", "html5"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://playable-templates.craftsmanplus.com/1679071057047_1679071057047.html",
+      thumbnail: "images/template-e.jpg"
+    },
+    {
+      id: 39,
+      name: "Desktop Export I",
+      category: "Casino",
+      tags: ["desktop", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/kCruzaWsPeI/uDYS9EydNFH/Default_Desktop__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/desktop-export-1.jpg"
+    },
+    {
+      id: 40,
+      name: "MRAID Export I",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/mliLexZ5Zq8/xKmSIHxoN2K/Default_MRAID__partner_template.html&companyId=UMNRKQHLvxK",
+      thumbnail: "images/mraid-export-1.jpg"
+    },
+    {
+      id: 41,
+      name: "MRAID Export II",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/Jn50IFVb3xQ/Default_MRAID__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-export-2.jpg"
+    },
+    {
+      id: 42,
+      name: "MRAID Export III",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/2nVEO7Z2NuF/Default_MRAID__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-export-3.jpg"
+    },
+    {
+      id: 43,
+      name: "MRAID Export IV",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/o18gmCgQxHj/ndDarOYCqly/Default_MRAID__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-export-4.jpg"
+    },
+    {
+      id: 44,
+      name: "MRAID Export V",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/w2Txde4uLGm/Default_MRAID__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-export-5.jpg"
+    },
+    {
+      id: 45,
+      name: "MRAID Export VI",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/qH8PRndie6D/Default_MRAID__partner_template.html&companyId=2UXsFpuzVSK",
+      thumbnail: "images/mraid-export-6.jpg"
+    },
+    {
+      id: 46,
+      name: "MRAID Export VII",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/Fx0Pdrw7l4K/Default_MRAID__partner_template.html",
+      thumbnail: "images/mraid-export-7.jpg"
+    },
+    {
+      id: 47,
+      name: "MRAID Export VIII",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/UvGy76FtrpU/Default_MRAID__partner_template.html",
+      thumbnail: "images/mraid-export-8.jpg"
+    },
+    {
+      id: 48,
+      name: "MRAID Export IX",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/kbUgk0SRWlY/Default_MRAID__partner_template.html&companyId=ATtIV70kACD",
+      thumbnail: "images/mraid-export-9.jpg"
+    },
+    {
+      id: 49,
+      name: "MRAID Export X",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/K1PZhkRekBJ/Default_MRAID__partner_template.html",
+      thumbnail: "images/mraid-export-10.jpg"
+    },
+    {
+      id: 50,
+      name: "MRAID Export XI",
+      category: "Casino",
+      tags: ["mraid", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/koTMTzDhN1V/Default_MRAID__partner_template.html",
+      thumbnail: "images/mraid-export-11.jpg"
+    },
+    {
+      id: 51,
+      name: "Desktop Export II",
+      category: "Casino",
+      tags: ["desktop", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/8ZR3jgLEdTD/WkDxps0eM8B/Default_Desktop__partner_template.html&companyId=hxAH9xKmiOf",
+      thumbnail: "images/desktop-export-2.jpg"
+    },
+    {
+      id: 52,
+      name: "Desktop Export III",
+      category: "Casino",
+      tags: ["desktop", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/09Z9QGz55NR/QZQ6G8zeVKo/Default_Desktop__partner_template.html&companyId=hxAH9xKmiOf",
+      thumbnail: "images/desktop-export-3.jpg"
+    },
+    {
+      id: 53,
+      name: "Desktop Export IV",
+      category: "Casino",
+      tags: ["desktop", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/K80n3FrhVcp/Tu0Th5vN8SC/Default_Desktop__partner_template.html&companyId=hxAH9xKmiOf",
+      thumbnail: "images/desktop-export-4.jpg"
+    },
+    {
+      id: 54,
+      name: "Desktop Export V",
+      category: "Casino",
+      tags: ["desktop", "export"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/2SY2lTIITKE/JWsJXoEQHYM/Default_Desktop__partner_template.html&companyId=LpCy1ZfVI3J",
+      thumbnail: "images/desktop-export-5.jpg"
+    },
+    // ── Legacy S3 entries ──────────────────────────────────────
+    {
+      id: 55,
+      name: "RMG Classic I",
+      category: "Casino",
+      tags: ["classic", "legacy"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://s3.us-east-1.amazonaws.com/production-elasticbeanstalk-environmen-databucket-1v9icak6ecq6y/1646169904132-1646169904132.html",
+      thumbnail: "images/rmg-classic-1.jpg"
+    },
+    {
+      id: 56,
+      name: "RMG Classic II",
+      category: "Casino",
+      tags: ["classic", "legacy"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://s3.us-east-1.amazonaws.com/production-elasticbeanstalk-environmen-databucket-1v9icak6ecq6y/1646169975400-1646169975400.html",
+      thumbnail: "images/rmg-classic-2.jpg"
+    },
+    {
+      id: 57,
+      name: "RMG Classic III",
+      category: "Casino",
+      tags: ["classic", "legacy"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?portrait=true&playable=https://s3.us-east-1.amazonaws.com/production-elasticbeanstalk-environmen-databucket-1v9icak6ecq6y/1646176246098-1646176246098.html",
+      thumbnail: "images/rmg-classic-3.jpg"
+    }
+  ];
+  // ─────────────────────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────────────────────
+  const grid     = document.getElementById('grid');
+  const navCount = document.getElementById('navCount');
+  const empty    = document.getElementById('emptyState');
+  const overlay  = document.getElementById('overlay');
+  const mIframe  = document.getElementById('mIframe');
+
+  const PH = `<div class="thumb-ph">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="2" width="24" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="16" cy="14" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M6 26 C9 21 12.5 18.5 16 18.5 C19.5 18.5 23 21 26 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span>Screenshot pending</span>
+  </div>`;
+
+  PLAYABLES.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.cat  = p.category;
+    card.dataset.name = p.name.toLowerCase();
+
+    card.innerHTML = `
+      <div class="card-thumb">
+        <img src="${p.thumbnail}" alt="${p.name}" onerror="this.parentElement.innerHTML=\`${PH.replace(/`/g,'\\`')}\`" />
+        <span class="card-cat ${p.category}">${p.category}</span>
+        <div class="play-overlay">
+          <div class="play-circle">
+            <svg viewBox="0 0 16 16"><path d="M4 2.5l9 5.5-9 5.5V2.5z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p class="card-name">${p.name}</p>
+        <div class="card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`;
+
+    card.addEventListener('click', () => openModal(p));
+    grid.appendChild(card);
+  });
+
+  updateCount();
+
+  function updateCount() {
+    const n = document.querySelectorAll('.card:not(.hidden)').length;
+    navCount.textContent = `${n} playable${n !== 1 ? 's' : ''}`;
+    empty.classList.toggle('show', n === 0);
+  }
+
+  // ── Filtering ────────────────────────────────────────────────
+  let activeCat = 'All', searchTerm = '';
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    applyFilters();
+  });
+
+  function applyFilters() {
+    document.querySelectorAll('.card').forEach(card => {
+      const catOk  = activeCat === 'All' || card.dataset.cat === activeCat;
+      const nameOk = !searchTerm || card.dataset.name.includes(searchTerm);
+      card.classList.toggle('hidden', !(catOk && nameOk));
+    });
+    updateCount();
+  }
+
+  // ── Modal ────────────────────────────────────────────────────
+  function getRawPlayableUrl(previewUrl) {
+    // Strip the play.preview.craftsmanplus.com wrapper, load only the raw endpoint
+    try {
+      const u = new URL(previewUrl);
+      const playableParam = u.searchParams.get('playable');
+      if (playableParam && playableParam.startsWith('http')) {
+        return playableParam;
+      }
+    } catch (e) {}
+    return previewUrl;
+  }
+
+  function openModal(p) {
+    document.getElementById('mTitle').textContent   = p.name;
+    const mCat = document.getElementById('mCat');
+    mCat.textContent = p.category;
+    mCat.className   = `card-cat ${p.category}`;
+    document.getElementById('mCatText').textContent = p.category;
+    document.getElementById('mTags').innerHTML      = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+    document.getElementById('mExternal').href       = p.previewUrl;
+    mIframe.src = getRawPlayableUrl(p.previewUrl);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    setTimeout(() => { mIframe.src = ''; }, 220);
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('mClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
