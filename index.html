@@ -460,7 +460,7 @@
       border: 1px solid var(--border-2);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 840px;
+      max-width: 520px;
       max-height: 88vh;
       display: flex;
       flex-direction: column;
@@ -473,7 +473,7 @@
     .overlay.open .modal { transform: translateY(0) scale(1); }
 
     .modal-head {
-      padding: 14px 18px;
+      padding: 13px 18px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -486,7 +486,7 @@
 
     .modal-title {
       font-family: var(--serif);
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--text);
     }
@@ -512,64 +512,87 @@
       color: var(--orange);
     }
 
+    /* Single-column layout — no sidebar */
     .modal-body {
-      display: grid;
-      grid-template-columns: 210px 1fr;
+      display: flex;
+      flex-direction: column;
       flex: 1;
       overflow: hidden;
       min-height: 0;
     }
 
-    .modal-side {
-      border-right: 1px solid var(--border);
-      padding: 18px;
-      overflow-y: auto;
+    /* Preview area — phone centered */
+    .modal-preview {
+      background: var(--bg);
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 24px 16px;
+      flex: 1;
+    }
+
+    /* Tags row below phone */
+    .modal-tags-row {
+      background: var(--bg);
+      padding: 0 24px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    /* Button footer */
+    .modal-footer {
       background: var(--bg-raised);
+      border-top: 1px solid var(--border);
+      padding: 12px 18px;
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    .meta-label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 4px;
-      font-weight: 500;
-    }
-
-    .meta-value { font-size: 13px; color: var(--text-2); }
-
-    .url-box {
-      font-size: 10px;
-      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-      color: var(--text-3);
-      background: var(--surface-3);
+    .reload-btn {
+      flex: 1;
+      background: var(--surface-2);
       border: 1px solid var(--border-2);
+      color: var(--text-2);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 0;
       border-radius: var(--radius);
-      padding: 9px;
-      word-break: break-all;
-      line-height: 1.55;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all var(--trans);
+      text-decoration: none;
+    }
+
+    .reload-btn:hover {
+      background: var(--surface-3);
+      color: var(--text);
     }
 
     .open-btn {
+      flex: 2;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 7px;
       background: var(--orange);
       color: #fff;
       font-family: var(--font);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.03em;
-      padding: 9px 14px;
+      padding: 9px 0;
       border-radius: var(--radius);
       border: none;
       cursor: pointer;
       text-decoration: none;
       transition: background var(--trans), box-shadow var(--trans);
-      margin-top: auto;
     }
 
     .open-btn:hover {
@@ -578,13 +601,6 @@
     }
 
     .open-btn svg { width: 13px; height: 13px; }
-
-    .modal-preview {
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
     /* Phone shell */
     .phone {
@@ -630,12 +646,96 @@
     .footer-right { font-size: 11px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; }
     .footer-accent { color: var(--orange); opacity: 0.8; }
 
+    /* ── STANDOUTS ───────────────────────────────────────────── */
+    .standouts-wrap {
+      padding: 28px 28px 0;
+    }
+
+    .standouts-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .standouts-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    .standouts-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(248,100,0,0.3), transparent);
+    }
+
+    .standouts-count {
+      font-size: 10px;
+      color: var(--text-3);
+      letter-spacing: 0.08em;
+    }
+
+    .standouts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+      gap: 16px;
+    }
+
+    /* Standout card gets an orange top border */
+    .card.standout {
+      border-top: 2px solid var(--orange);
+    }
+
+    .card.standout:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(248,100,0,0.35);
+      border-color: var(--orange);
+    }
+
+    /* Standout badge on thumbnail */
+    .standout-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 100px;
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .section-divider {
+      padding: 24px 28px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-divider-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .section-divider-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width: 640px) {
-      nav, .hero, .filter-bar, .grid-wrap, footer { padding-left: 14px; padding-right: 14px; }
-      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .modal-body   { grid-template-columns: 1fr; }
-      .modal-side   { border-right: none; border-bottom: 1px solid var(--border); max-height: 220px; }
+      nav, .hero, .filter-bar, .grid-wrap, .standouts-wrap, .section-divider, footer { padding-left: 14px; padding-right: 14px; }
+      .catalog-grid, .standouts-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .modal-body   { flex-direction: column; }
       .search-input { width: 120px; }
       .search-input:focus { width: 150px; }
     }
@@ -679,6 +779,22 @@
     </div>
   </div>
 
+  <!-- STANDOUTS -->
+  <div class="standouts-wrap" id="standoutsWrap">
+    <div class="standouts-header">
+      <span class="standouts-label">Standouts</span>
+      <div class="standouts-rule"></div>
+      <span class="standouts-count">8 featured</span>
+    </div>
+    <div class="standouts-grid" id="standoutsGrid"></div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <span class="section-divider-label">All Playables</span>
+    <div class="section-divider-rule"></div>
+  </div>
+
   <!-- GRID -->
   <div class="grid-wrap">
     <div class="catalog-grid" id="grid">
@@ -691,36 +807,42 @@
   <!-- MODAL -->
   <div class="overlay" id="overlay" role="dialog" aria-modal="true">
     <div class="modal">
+
+      <!-- Top bar: category pill + title + close -->
       <div class="modal-head">
         <div class="modal-head-left">
-          <span class="modal-title" id="mTitle"></span>
           <span class="card-cat" id="mCat"></span>
+          <span class="modal-title" id="mTitle"></span>
         </div>
         <button class="modal-close" id="mClose" aria-label="Close">×</button>
       </div>
+
+      <!-- Body: phone preview + tags below -->
       <div class="modal-body">
-        <div class="modal-side">
-          <div>
-            <p class="meta-label">Category</p>
-            <p class="meta-value" id="mCatText"></p>
-          </div>
-          <div>
-            <p class="meta-label">Tags</p>
-            <div class="card-tags" id="mTags"></div>
-          </div>
-          <a class="open-btn" id="mExternal" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 13 13" fill="none">
-              <path d="M2 11L11 2M11 2H6.5M11 2V6.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Open External
-          </a>
-        </div>
         <div class="modal-preview">
           <div class="phone">
             <iframe id="mIframe" title="Playable Preview" allow="autoplay; fullscreen" loading="lazy"></iframe>
           </div>
         </div>
+        <div class="modal-tags-row" id="mTags"></div>
       </div>
+
+      <!-- Footer: Reload + Open External -->
+      <div class="modal-footer">
+        <button class="reload-btn" id="mReload">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M2 7.5A4.5 4.5 0 1 0 3.5 4M2 2v2.5H4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Reload
+        </button>
+        <a class="open-btn" id="mExternal" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 13 13" fill="none">
+            <path d="M2 11L11 2M11 2H6.5M11 2V6.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Open External
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -1193,13 +1315,85 @@ const PLAYABLES = [
     }
   ];
   // ─────────────────────────────────────────────────────────────
+  // STANDOUTS — 8 RMG-verified featured entries
+  // ─────────────────────────────────────────────────────────────
+  const STANDOUTS = [
+    {
+      id: 's1',
+      name: "DraftKings — UFC 318",
+      category: "Casino",
+      tags: ["draftkings", "ufc", "gambling"],
+      previewUrl: "https://play.preview.craftsmanplus.com/?playable=iOvXbf0jaF8%2FYigLEAxErm1%2F1903764432&companyId=iOvXbf0jaF8&creativeId=YigLEAxErm1&name=DK.%D0%A160&portrait=true&ratio=2:1",
+      thumbnail: "images/standout-dk-ufc318.jpg"
+    },
+    {
+      id: 's2',
+      name: "DraftKings — UFC 303",
+      category: "Casino",
+      tags: ["draftkings", "ufc", "gambling"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview?companyId=iOvXbf0jaF8&playable=https%3A%2F%2Fendpoints.prod.craftsmanplus.com%2Fexports%2Fzdyaty0XRC1%2FIezGv0hnifr%2FDefault_Desktop__partner_template.html&portrait=true",
+      thumbnail: "images/standout-dk-ufc303.jpg"
+    },
+    {
+      id: 's3',
+      name: "PCH — Las Vegas World Mini Golf",
+      category: "Lottery",
+      tags: ["pch", "sweepstakes", "mini-golf"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/17uLh6XgNEI/8n9eO1q7JWG/Default_Desktop__partner_template.html&companyId=udnSIGBLfAD",
+      thumbnail: "images/standout-pch-minigolf.jpg"
+    },
+    {
+      id: 's4',
+      name: "PCH — Las Vegas World Two Games",
+      category: "Lottery",
+      tags: ["pch", "sweepstakes", "las vegas"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?portrait=true&playable=https://endpoints.prod.craftsmanplus.com/exports/zgddbIpZzDc/v2HP9Vh06AP/Default_Desktop__partner_template.html&companyId=udnSIGBLfAD",
+      thumbnail: "images/standout-pch-twogames.jpg"
+    },
+    {
+      id: 's5',
+      name: "Bspot — Golden Bards",
+      category: "Casino",
+      tags: ["bspot", "slots", "gambling"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/90bspot/16/audio_on/index.html?portrait=true",
+      thumbnail: "images/standout-bspot.jpg"
+    },
+    {
+      id: 's6',
+      name: "Florida Lottery — Monopoly Scratcher",
+      category: "Lottery",
+      tags: ["lottery", "scratch", "monopoly"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/76ppkmonopoly/12/index.html?portrait=true",
+      thumbnail: "images/standout-fl-lottery.jpg"
+    },
+    {
+      id: 's7',
+      name: "Halfdome — Pointsbet Basketball",
+      category: "Casino",
+      tags: ["betting", "sports", "basketball"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/123halfdome/24/index.html?portrait=true",
+      thumbnail: "images/standout-halfdome.jpg"
+    },
+    {
+      id: 's8',
+      name: "Skillz — Blackout Bingo",
+      category: "Casino",
+      tags: ["skillz", "bingo", "casino"],
+      previewUrl: "https://play.preview.craftsmanplus.com/preview/?playable=https://production-static-playables.s3.amazonaws.com/test/82skillz/blackoutblitz/14/index.html?portrait=true",
+      thumbnail: "images/standout-skillz-bingo.jpg"
+    }
+  ];
+
+  // ─────────────────────────────────────────────────────────────
   // RENDER
   // ─────────────────────────────────────────────────────────────
-  const grid     = document.getElementById('grid');
-  const navCount = document.getElementById('navCount');
-  const empty    = document.getElementById('emptyState');
-  const overlay  = document.getElementById('overlay');
-  const mIframe  = document.getElementById('mIframe');
+  const grid           = document.getElementById('grid');
+  const standoutsGrid  = document.getElementById('standoutsGrid');
+  const standoutsWrap  = document.getElementById('standoutsWrap');
+  const navCount       = document.getElementById('navCount');
+  const empty          = document.getElementById('emptyState');
+  const overlay        = document.getElementById('overlay');
+  const mIframe        = document.getElementById('mIframe');
 
   const PH = `<div class="thumb-ph">
     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1210,6 +1404,34 @@ const PLAYABLES = [
     <span>Screenshot pending</span>
   </div>`;
 
+  // ── Render standout cards ────────────────────────────────────
+  STANDOUTS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card standout';
+    card.dataset.cat  = p.category;
+    card.dataset.name = p.name.toLowerCase();
+
+    card.innerHTML = `
+      <div class="card-thumb">
+        <img src="${p.thumbnail}" alt="${p.name}" onerror="this.parentElement.innerHTML=\`${PH.replace(/\`/g,'\`')}\`" />
+        <span class="card-cat ${p.category}">${p.category}</span>
+        <span class="standout-badge">★ Standout</span>
+        <div class="play-overlay">
+          <div class="play-circle">
+            <svg viewBox="0 0 16 16"><path d="M4 2.5l9 5.5-9 5.5V2.5z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <p class="card-name">${p.name}</p>
+        <div class="card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`;
+
+    card.addEventListener('click', () => openModal(p));
+    standoutsGrid.appendChild(card);
+  });
+
+  // ── Render all playables ──────────────────────────────────────
   PLAYABLES.forEach(p => {
     const card = document.createElement('div');
     card.className = 'card';
@@ -1238,7 +1460,7 @@ const PLAYABLES = [
   updateCount();
 
   function updateCount() {
-    const n = document.querySelectorAll('.card:not(.hidden)').length;
+    const n = document.querySelectorAll('#grid .card:not(.hidden)').length;
     navCount.textContent = `${n} playable${n !== 1 ? 's' : ''}`;
     empty.classList.toggle('show', n === 0);
   }
@@ -1261,17 +1483,29 @@ const PLAYABLES = [
   });
 
   function applyFilters() {
-    document.querySelectorAll('.card').forEach(card => {
+    // Filter main grid cards
+    document.querySelectorAll('#grid .card').forEach(card => {
       const catOk  = activeCat === 'All' || card.dataset.cat === activeCat;
       const nameOk = !searchTerm || card.dataset.name.includes(searchTerm);
       card.classList.toggle('hidden', !(catOk && nameOk));
     });
+
+    // Filter standout cards — hide section entirely if no match
+    let standoutVisible = 0;
+    document.querySelectorAll('#standoutsGrid .card').forEach(card => {
+      const catOk  = activeCat === 'All' || card.dataset.cat === activeCat;
+      const nameOk = !searchTerm || card.dataset.name.includes(searchTerm);
+      const show   = catOk && nameOk;
+      card.classList.toggle('hidden', !show);
+      if (show) standoutVisible++;
+    });
+    standoutsWrap.style.display = standoutVisible > 0 ? '' : 'none';
+
     updateCount();
   }
 
   // ── Modal ────────────────────────────────────────────────────
   function getRawPlayableUrl(previewUrl) {
-    // Strip the play.preview.craftsmanplus.com wrapper, load only the raw endpoint
     try {
       const u = new URL(previewUrl);
       const playableParam = u.searchParams.get('playable');
@@ -1283,13 +1517,12 @@ const PLAYABLES = [
   }
 
   function openModal(p) {
-    document.getElementById('mTitle').textContent   = p.name;
+    document.getElementById('mTitle').textContent = p.name;
     const mCat = document.getElementById('mCat');
     mCat.textContent = p.category;
     mCat.className   = `card-cat ${p.category}`;
-    document.getElementById('mCatText').textContent = p.category;
-    document.getElementById('mTags').innerHTML      = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
-    document.getElementById('mExternal').href       = p.previewUrl;
+    document.getElementById('mTags').innerHTML   = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+    document.getElementById('mExternal').href    = p.previewUrl;
     mIframe.src = getRawPlayableUrl(p.previewUrl);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1302,6 +1535,11 @@ const PLAYABLES = [
   }
 
   document.getElementById('mClose').addEventListener('click', closeModal);
+  document.getElementById('mReload').addEventListener('click', () => {
+    const src = mIframe.src;
+    mIframe.src = '';
+    setTimeout(() => { mIframe.src = src; }, 80);
+  });
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
